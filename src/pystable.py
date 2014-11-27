@@ -16,15 +16,15 @@ def parse_config(posts_directory):
     config_file = posts_directory+'/site.config'
     parser.read(config_file)
     
-    site_title    = parser.get("main","title")
-    site_subtitle = parser.get("main","subtitle")
-    site_author   = parser.get("main","author")
-    site_aboutme  = parser.get("main","aboutme")
-    site_info     = parser.get("main","info")
-    syntax        = parser.get("main","syntax")
-    site_url      = parser.get("main","url")
-    site_output   = parser.get("main","output")
-    site_theme    = parser.get("main","theme")
+    site_title    = parser.get("info","title")
+    site_subtitle = parser.get("info","subtitle")
+    site_author   = parser.get("info","author")
+    site_aboutme  = parser.get("info","aboutme")
+    site_info     = parser.get("info","info")
+    syntax        = parser.get("config","syntax")
+    site_url      = parser.get("config","url")
+    site_output   = parser.get("config","output")
+    site_theme    = parser.get("config","theme")
     style_file    = site_url+'/'+site_output+'/styles.css'
 
 def parse_posts(posts_directory):
@@ -57,7 +57,7 @@ def generate_footer(theme):
     footer_tmpl = open(theme+'/footer.tmpl','r')
     lines = footer_tmpl.readlines()
     footer = ""
-    disclaimer = "created with pystable: &copy; Mario Krapp (2014)"
+    disclaimer = 'Created by <a href="https://github.com/mkrapp/pystable">Pystable</a> (&copy; Mario Krapp, 2014)'
     for l in lines:
         s = Template(l)
 	footer += s.safe_substitute(disclaimer=disclaimer)
