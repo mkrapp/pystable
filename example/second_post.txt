@@ -1,0 +1,30 @@
+date: 2014/11/26
+title: Second post
+tags: posts,second
+
+Now that sorting works This should appear as second post.
+
+A _newline_ should be recognised.
+
+| Tables   |      Are      |  Cool |
+|----------|:-------------:|------:|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
+
+
+Here is some `inline code`. And here's a [link to Google](http://www.google.com). A more sophisticated code listing:
+
+```fortran
+program main
+    implicit none
+    integer :: k
+
+    k = 0
+    write(*,*) k
+end program
+```
+
+```python
+print True
+```
