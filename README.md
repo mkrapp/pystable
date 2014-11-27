@@ -1,4 +1,6 @@
-Pystable is a static blog engine written in Python.
+Pystable
+========
+Pystable is a static blog engine written in Python. Edit your posts as Markdown files, add some information, and Pystable converts everything into a complete static web page.
 
 Requirements
 ============
@@ -44,3 +46,8 @@ you can run Pystable on your posts directory
 python src/pystable.py my_posts
 ```
 Now, you just need to upload the output directory as defined `site.config`to your web page.
+
+How it works
+============
+
+Apart from `markdown2` all packages are pure Python libraries.
