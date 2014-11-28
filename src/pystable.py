@@ -30,9 +30,8 @@ def parse_config(posts_directory):
 def parse_posts(posts_directory):
     files = glob.glob(posts_directory+'/*.txt')
     posts = []
-    for i,p in enumerate(files):
+    for p in files:
     	post = {}
-	post["id"] = i
         meta = []
 	content = ""
 	is_content = False
