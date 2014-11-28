@@ -1,6 +1,6 @@
 Pystable
 ========
-Pystable is a static blog engine written in Python. Edit your posts as Markdown files, add some information, and Pystable converts everything into a complete static web page.
+Pystable is a static blog engine written in Python. Edit your posts as Markdown files, add some information, and Pystable converts everything into a complete static web page. An example web page can be found [here](https://www.liselotte.duckdns.org/pystable_test/)
 
 Requirements
 ============
