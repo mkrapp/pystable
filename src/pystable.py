@@ -54,6 +54,7 @@ def parse_posts(posts_directory):
         date = parse(post['meta']['date'])
         post["year"] = date.year 
         post["month"] = date.month 
+        post["date"] = date 
 	posts.append(post)
     return posts
 
@@ -257,6 +258,10 @@ def create_blog(posts_dir):
     # copy style.css
     shutil.copy2(theme+'/styles.css',site_output+'/styles.css')
     posts = parse_posts(posts_dir)
+    # sort list of posts in descending order of their date 
+    decorated_posts = [(dict_["date"], dict_) for dict_ in posts]
+    decorated_posts.sort(reverse=True)
+    posts = [dict_ for (key, dict_) in decorated_posts]
     tags = parse_tags(posts)
     dates = parse_dates(posts)
     header  = generate_header(theme)
