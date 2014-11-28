@@ -1,0 +1,75 @@
+body {
+	padding-bottom: 1em;
+	border-right: 2px solid rgb(128, 128, 128);
+	background-color: white;
+	color: black;
+	margin: 0;
+	font-family: 'American Typewriter', Georgia, sans-serif;
+}
+
+
+
+div.title h1 {
+        margin: 0px -10px;
+	padding: 5px 10px 0px 10px;
+	text-align: center;
+}
+
+div.title a {
+	color: black !important;
+	text-decoration: none !important;
+}
+div.title a:hover {
+	color: black !important;
+	text-decoration: none !important;
+}
+
+div.title h2 {
+	margin: 0 1em 1ex 0;
+	padding: 0;
+        text-align: right;
+}
+
+legend a {
+	color: black !important;
+	text-decoration: none !important;
+}
+legend a:hover {
+	color: black !important;
+	text-decoration: none !important;
+}
+
+legend {
+        font-weight: bold;
+	font-size: 105%;
+}
+
+div.sidebar a{
+	text-decoration: none !important;
+}
+
+a {
+	color: black !important;
+}
+
+a:hover {
+	-moz-box-shadow: 1px 1px 5px #888;
+	-webkit-box-shadow: 1px 1px 5px #888;
+	box-shadow: 1px 1px 5px #888;
+	text-decoration: none !important;
+}
+
+pre {
+	overflow:	auto;
+	background:	#222;
+	color:          #DCCF8F;
+	padding: 5px  10px;
+}
+
+table {
+	border-spacing: 10px;
+}
+
+div.footer {
+        font-size: 75%;
+}
