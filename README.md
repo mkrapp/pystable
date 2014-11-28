@@ -1,6 +1,8 @@
 Pystable
 ========
-Pystable is a static blog engine written in Python. Edit your posts as Markdown files, add some information, and Pystable converts everything into a complete static web page. An example web page can be found [here](https://www.liselotte.duckdns.org/pystable_test/)
+Pystable is a static blog engine written in Python. It is inspired by Steve Kemp's [Chronicle](http://www.steve.org.uk/Software/chronicle/), a simple blog compiler, written in Perl with minimal dependencies.
+
+Edit your posts as Markdown files, add some information, and Pystable converts everything into a complete static web page. An example web page can be found [here](https://www.liselotte.duckdns.org/pystable_test/)
 
 Requirements
 ============
@@ -91,28 +93,28 @@ for l in lines:
 header_tmpl.close()
 ```
 
-Structure of a pystable-generate web page
---------------------------------------------
+Structure of a pystable-generated web page
+------------------------------------------
 ```
-+---------------------------------------+\
-|            main.html.tmpl             |                 +-----------+
-| +-----------------------------------+ |  \              |           |
-| |              header.tmpl          | |                 |  archive  |
-| +-----------------------------------+ |    \       +----------+     |
-| +------------------+ +--------------+ |            |          |     |
-| | +-post 1-------+ | |              | |      \     |   tags   |     |-----+
-| | |   post.tmpl  | | | sidebar.tmpl | |      +-----------+    |-----+     |
-| | +--------------+ | |              | |      |           |    |  | post 1 |--+
-| | +-post 2-------+ | |              | |      | main page |    |  |        |  |
-| | |   post.tmpl  | | |              | |      |           |----+  |        |  |--+
-| | +--------------+ | |              | |      |           |       |        |  |  |
-| |    ...           | |              | |      |           |       +--------+  |  |
-| | +-post N-------+ | |              | |      +-----------+           |       |  |
-| | |   post.tmpl  | | |              | |      /                       +-------+  |
-| | +--------------+ | |              | |                                |        |
-| +------------------+ +--------------+ |    /                           +--------+
-| +-----------------------------------+ |   
-| |            footer.tmpl            | |  /
-| +-----------------------------------+ | 
-+---------------------------------------+/
++-----------------------------------------+\
+|            main.html.tmpl               |                 +-----------+
+|  +-----------------------------------+  |  \              |           |
+|  |              header.tmpl          |  |                 |  archive  |
+|  +-----------------------------------+  |    \       +----------+     |
+|  +------------------+ +--------------+  |            |          |     |
+|  | +-post 1-------+ | |              |  |      \     |   tags   |     |-----+
+|  | |   post.tmpl  | | | sidebar.tmpl |  |      +-----------+    |-----+     |
+|  | +--------------+ | |              |  |      |           |    |  | post 1 |--+
+|  | +-post 2-------+ | |              |  |      | main page |    |  |        |  |
+|  | |   post.tmpl  | | |              |  |      |           |----+  |        |  |--+
+|  | +--------------+ | |              |  |      |           |       |        |  |  |
+|  |    ...           | |              |  |      |           |       +--------+  |  |
+|  | +-post N-------+ | |              |  |      +-----------+           |       |  |
+|  | |   post.tmpl  | | |              |  |      /                       +-------+  |
+|  | +--------------+ | |              |  |                                |        |
+|  +------------------+ +--------------+  |    /                           +--------+
+|  +-----------------------------------+  |   
+|  |            footer.tmpl            |  |  /
+|  +-----------------------------------+  | 
++-----------------------------------------+/
 ```
