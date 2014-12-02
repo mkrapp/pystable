@@ -10,3 +10,9 @@ theme = simple
 syntax = markdown
 url = http://www.example.com
 output = ./
+[contact] 
+twitter = example1000
+email = me@example.com
+facebook = 
+google+ = 
+github = 
