@@ -11,7 +11,8 @@ import calendar
 def parse_config(posts_directory):
     global site_title, site_subtitle, site_author, \
            site_aboutme, site_info, site_syntax, \
-	   site_url, site_output, site_theme, style_file
+	   site_url, site_output, site_theme, style_file, \
+	   contact
     parser = SafeConfigParser()
     config_file = posts_directory+'/site.config'
     parser.read(config_file)
@@ -26,12 +27,19 @@ def parse_config(posts_directory):
     site_output   = parser.get("config","output")
     site_theme    = parser.get("config","theme")
     style_file    = site_url+'/'+site_output+'/styles.css'
+    contact             = {}
+    contact["twitter"]  = parser.get("contact","twitter")
+    contact["facebook"] = parser.get("contact","facebook")
+    contact["email"]    = parser.get("contact","email")
+    contact["google+"]  = parser.get("contact","google+")
+    contact["github"]   = parser.get("contact","github")
+    print contact
 
 def parse_posts(posts_directory):
     files = glob.glob(posts_directory+'/*.txt')
     posts = []
     for p in files:
-    	post = {}
+        post = {}
         meta = []
 	content = ""
 	is_content = False
@@ -85,8 +93,8 @@ def generate_footer(theme):
     footer_tmpl = open(theme+'/footer.tmpl','r')
     lines = footer_tmpl.readlines()
     footer = ""
-    disclaimer = 'Created by <a href="https://github.com/mkrapp/pystable">Pystable</a> \
-                  (&copy; Mario Krapp, 2014)'
+    disclaimer = 'Created by <a href="https://github.com/mkrapp/pystable" target="_blank">Pystable</a> \
+                  (&copy; 2014 Mario Krapp. All rights reserved.'
     for l in lines:
         s = Template(l)
 	footer += s.safe_substitute(disclaimer=disclaimer)
@@ -107,6 +115,22 @@ def generate_header(theme):
 def generate_sidebar(dates,tags,theme):
     sidebar_tmpl = open(theme+'/sidebar.tmpl','r')
     lines = sidebar_tmpl.readlines()
+    # contacts
+    twitter = ""
+    if contact["twitter"] != "":
+        twitter = '<a href="https://twitter.com/'+contact["twitter"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/twitter-32-black.png"></img></a>'
+    email = ""
+    if contact["email"] != "":
+        email = '<a href="mailto:'+contact["email"]+'?subject=Mail from '+site_url+'/'+site_output+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/email-32-black.png"></img></a>'
+    facebook = ""
+    if contact["facebook"] != "":
+        facebook = '<a href="https://www.facebook.com/'+contact["facebook"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/facebook-32-black.png"></img></a>'
+    google = ""
+    if contact["google+"] != "":
+        google = '<a href="https://www.plus.google.com/'+contact["google+"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/googleplus-32-black.png"></img></a>'
+    github = ""
+    if contact["github"] != "":
+        github = '<a href="https://www.github.com/'+contact["github"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/github-32-black.png"></img></a>'
     # archive
     archive = "<ul>"
     for date in dates:
@@ -131,7 +155,8 @@ def generate_sidebar(dates,tags,theme):
     for l in lines:
         s = Template(l)
 	sidebar += s.safe_substitute(author=site_author, aboutme=site_aboutme, info=site_info,
-	                             archive=archive, tagcloud=tagcloud[:-2])
+	                             archive=archive, tagcloud=tagcloud[:-2],
+				     twitter=twitter,email=email,facebook=facebook,github=github,google=google)
     sidebar_tmpl.close()
     return sidebar
 
@@ -149,7 +174,7 @@ def generate_main_page(posts,theme):
     index_html = open(site_output+'/index.html','w')
     main = ""
     for p in posts:
-        post = generate_post_page(p,'themes/simple')
+        post = generate_post_page(p,theme)
     	main += post["html_content"]
     for l in lines:
         s = Template(l)
@@ -257,6 +282,8 @@ def create_blog(posts_dir):
         os.makedirs(site_output)
     # copy style.css
     shutil.copy2(theme+'/styles.css',site_output+'/styles.css')
+    if not os.path.exists(site_output+'/icons'):
+        shutil.copytree('themes/icons',site_output+'/icons')
     posts = parse_posts(posts_dir)
     # sort list of posts in descending order of their date 
     decorated_posts = [(dict_["date"], dict_) for dict_ in posts]
