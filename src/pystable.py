@@ -133,10 +133,10 @@ def generate_sidebar(dates,tags,theme):
         github = '<a href="https://www.github.com/'+contact["github"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/github-32-black.png"></img></a>'
     # archive
     archive = "<ul>"
-    for date in dates:
+    for date in dates[::-1]:
        archive += "<li>%.4d</li>" % date["year"]
        archive += "<ul>"
-       for month in list(set(date["months"])):
+       for month in list(set(date["months"]))[::-1]:
            k = date["months"].count(month)
 	   n = ""
 	   if k>1: n = ' ('+str(k)+')'
