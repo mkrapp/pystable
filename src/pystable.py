@@ -33,6 +33,7 @@ def parse_config(posts_directory):
     contact["email"]    = parser.get("contact","email")
     contact["google+"]  = parser.get("contact","google+")
     contact["github"]   = parser.get("contact","github")
+    contact["linkedin"] = parser.get("contact","linkedin")
     print contact
 
 def parse_posts(posts_directory):
@@ -94,7 +95,7 @@ def generate_footer(theme):
     lines = footer_tmpl.readlines()
     footer = ""
     disclaimer = 'Created by <a href="https://github.com/mkrapp/pystable" target="_blank">Pystable</a> \
-                  (&copy; 2014 Mario Krapp. All rights reserved.'
+                  (&copy; 2014-2015 Mario Krapp. All rights reserved.)'
     for l in lines:
         s = Template(l)
 	footer += s.safe_substitute(disclaimer=disclaimer)
@@ -128,6 +129,9 @@ def generate_sidebar(dates,tags,theme):
     google = ""
     if contact["google+"] != "":
         google = '<a href="https://www.plus.google.com/'+contact["google+"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/googleplus-32-black.png"></img></a>'
+    linkedin = ""
+    if contact["linkedin"] != "":
+        linkedin = '<a href="'+contact["linkedin"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/linkedin-32-black.png"></img></a>'
     github = ""
     if contact["github"] != "":
         github = '<a href="https://www.github.com/'+contact["github"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/github-32-black.png"></img></a>'
@@ -136,7 +140,7 @@ def generate_sidebar(dates,tags,theme):
     for date in dates[::-1]:
        archive += "<li>%.4d</li>" % date["year"]
        archive += "<ul>"
-       for month in list(set(date["months"]))[::-1]:
+       for month in sorted(list(set(date["months"])))[::-1]:
            k = date["months"].count(month)
 	   n = ""
 	   if k>1: n = ' ('+str(k)+')'
@@ -156,7 +160,7 @@ def generate_sidebar(dates,tags,theme):
         s = Template(l)
 	sidebar += s.safe_substitute(author=site_author, aboutme=site_aboutme, info=site_info,
 	                             archive=archive, tagcloud=tagcloud[:-2],
-				     twitter=twitter,email=email,facebook=facebook,github=github,google=google)
+				     twitter=twitter,email=email,facebook=facebook,github=github,google=google,linkedin=linkedin)
     sidebar_tmpl.close()
     return sidebar
 
