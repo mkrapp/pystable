@@ -95,7 +95,7 @@ def generate_footer(theme):
     lines = footer_tmpl.readlines()
     footer = ""
     disclaimer = 'Created by <a href="https://github.com/mkrapp/pystable" target="_blank">Pystable</a> \
-                  (&copy; 2014-2015 Mario Krapp. All rights reserved.)'
+                  (&copy; 2014-2016 Mario Krapp. All rights reserved.)'
     for l in lines:
         s = Template(l)
 	footer += s.safe_substitute(disclaimer=disclaimer)
@@ -137,7 +137,7 @@ def generate_sidebar(dates,tags,theme):
         github = '<a href="https://www.github.com/'+contact["github"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/github-32-black.png"></img></a>'
     # archive
     archive = "<ul>"
-    for date in dates[::-1]:
+    for date in sorted(dates):
        archive += "<li>%.4d</li>" % date["year"]
        archive += "<ul>"
        for month in sorted(list(set(date["months"])))[::-1]:
