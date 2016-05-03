@@ -29,6 +29,13 @@ theme = simple
 syntax = markdown
 url = http://www.example.com
 output = ./
+[contact]
+twitter = <your twitter name | or empty>
+email = <your email address | or empty>
+facebook = <your facebook facebook URL suffix | or empty>
+google+ = <your google+ account | or empty>
+linkedin = <your linkedin user name | or empty>
+github = <your github user name | or empty>
 ```
 Configure this file to suit your needs.
 
