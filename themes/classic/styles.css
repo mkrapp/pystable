@@ -61,8 +61,6 @@ a {
 }
 
 a:hover {
-	-moz-box-shadow: 1px 1px 5px #888;
-	-webkit-box-shadow: 1px 1px 5px #888;
 	box-shadow: 1px 1px 5px #888;
 	text-decoration: none !important;
 }
@@ -73,8 +71,6 @@ div.about a {
 }
 
 div.about a:hover {
-	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 	color: black !important;
 	text-decoration: none !important;
