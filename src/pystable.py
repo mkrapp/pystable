@@ -72,14 +72,11 @@ def parse_dates(posts):
     date_list = [parse(p['meta']['date']) for p in posts]
     years = [parse(p['meta']['date']).year for p in posts]
     years = list(set(years))
-    dates = []
+    dates = {}
     for year in years:
-        d = {}
-        d["year"] = year
-	d["months"] = []
+        dates[year] = []
 	for date in date_list:
-	    if date.year == year: d["months"].append(date.month)
-	dates.append(d)
+	    if date.year == year: dates[year].append(date.month)
     return dates
 
 def parse_tags(posts):
@@ -137,14 +134,14 @@ def generate_sidebar(dates,tags,theme):
         github = '<a href="https://www.github.com/'+contact["github"]+'" target="_blank"><img src="'+site_url+'/'+site_output+'/icons/github-32-black.png"></img></a>'
     # archive
     archive = "<ul>"
-    for date in sorted(dates):
-       archive += "<li>%.4d</li>" % date["year"]
+    for year in sorted(dates)[::-1]:
+       archive += "<li>%.4d</li>" % year
        archive += "<ul>"
-       for month in sorted(list(set(date["months"])))[::-1]:
-           k = date["months"].count(month)
+       for month in sorted(set(dates[year]))[::-1]:
+           k = dates[year].count(month)
 	   n = ""
 	   if k>1: n = ' ('+str(k)+')'
-           link = site_url+'/'+site_output+'/archive/%.4d/%.2d/index.html' % (date["year"],month)
+           link = site_url+'/'+site_output+'/archive/%.4d/%.2d/index.html' % (year,month)
            archive += '<li><a href="'+link+'">' + calendar.month_name[month] + n + '</a></li>'
        archive += "</ul>"
     archive += "</ul>"
@@ -258,19 +255,19 @@ def generate_post_page(post,theme):
 
 def generate_archives_page(posts,dates,theme):
     # create a full web page for each month of each year (if posts are available for that date)
-    for date in dates:
-        months = list(set(date["months"]))
+    for year in sorted(dates):
+        months = list(set(dates[year]))
         for month in months:
-            print 'create index.html for '+calendar.month_name[month]+' %.4d' % date["year"]
+            print 'create index.html for '+calendar.month_name[month]+' %.4d' % year
             index_tmpl = open(theme+'/main.html.tmpl','r')
             lines = index_tmpl.readlines()
-            index_html = open(site_output+'/archive/%.4d/%.2d/index.html' % (date["year"],month),'w')
+            index_html = open(site_output+'/archive/%.4d/%.2d/index.html' % (year,month),'w')
             main = ""
             for p in posts:
                 if month == p["month"]:
                     main += p["html_content"]
                     shutil.copy2(site_output+'/'+p["html_file"],
-		                 site_output+'/archive/%.4d/%.2d/' % (date["year"],month)+p["html_file"])
+		                 site_output+'/archive/%.4d/%.2d/' % (year,month)+p["html_file"])
             for l in lines:
                 s = Template(l)
                 index_html.write(s.safe_substitute(style_file=style_file, header=header, sidebar=sidebar,
