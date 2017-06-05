@@ -151,7 +151,7 @@ def generate_sidebar(dates,tags,theme):
         tag_dir = site_output+'/tag/'+tag[0]
 	tag_dir = tag_dir.replace(' ','%20')
 	size = 40-25/tag[1]
-        tagcloud += '<span style="font-size: %.2dpx"><a href=' % size +site_url+'/'+tag_dir+'/index.html>'+tag[0]+'</a></span>, '
+        tagcloud += '<span style="font-size: %.2dpx"><a href=' % size +site_url+'/'+tag_dir+'/index.html>'+tag[0]+'</a></span> '
     sidebar = ""
     for l in lines:
         s = Template(l)
